@@ -21,7 +21,7 @@ while flag:
             flag = False
             break
         else:
-            print('wrong command')
+            print('Wrong command')
         if i == 2:
             print('Too much errors')
             flag = False
