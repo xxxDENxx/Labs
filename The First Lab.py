@@ -2,7 +2,7 @@ flag = True
 while flag:
     val_1 = int(input('Input first number: '))
     val_2 = int(input('Input second number: '))
-    command = input('Input operation: ')
+    command = input('Input operation(+, -, *, /): ')
     if command == '+':
         print(val_1 + val_2)
     elif command == '-':
