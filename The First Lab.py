@@ -14,7 +14,7 @@ while flag:
     else:
         print('Wrong command')
     for i in range(3):
-        command = input('Continue?(Y/N)')
+        command = input('Continue?(Y/N) ')
         if command == 'Y':
             break
         elif command == "N":
