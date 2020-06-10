@@ -29,9 +29,10 @@ class Data:
                 self.lap = dict(ast.literal_eval(sd.read()))
         else:
             with open("servdata.encode", "w", encoding="UTF-8") as sd:
-                datadict: typing.Dict[str, typing.Dict[bytes, bytes]] = {"Logins and Passwords": {}}
-                self.lap = datadict
-                sd.write(str(datadict))
+                lap = "Logins and Passwords"
+                dtdict: typing.Dict[str, typing.Dict[bytes, bytes]] = {lap: {}}
+                self.lap = dtdict
+                sd.write(str(dtdict))
         self.nwckey = b""
 
     def Creation(self) -> None:
