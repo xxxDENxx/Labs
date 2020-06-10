@@ -1,4 +1,3 @@
-from inspect import getsourcefile
 from os.path import abspath
 import hashlib
 import string
