@@ -5,6 +5,8 @@ import notes
 
 if __name__ == "__main__":
     if os.name == "nt":
+        hl = "Неправильная команда"
+        hp = "Слишком много ошибок"
         flag = True
         inter = db.Data()
         while flag:
@@ -69,9 +71,9 @@ if __name__ == "__main__":
                                                         print('Удалено\n')
                                                         break
                                                     else:
-                                                        print("Wrong команда")
+                                                        print(hl)
                                                     if i == 2:
-                                                        print("Too much ошибк")
+                                                        print(hp)
                                             elif c == "5":
                                                 pep82 = ntwork.NotesList()
                                                 print("Заметки:", pep82, "\n")
@@ -82,7 +84,7 @@ if __name__ == "__main__":
                                             elif c == "7":
                                                 pass
                                             else:
-                                                print("Неправильная команда.")
+                                                print("Неправильная команда")
                                                 print("Возврат в главное меню")
                                         except IndexError:
                                             print("Неправильная команда\n")
@@ -107,16 +109,16 @@ if __name__ == "__main__":
                                                         Flag = False
                                                         break
                                                     else:
-                                                        print("wrong комадна")
+                                                        print(hl)
                                                     if i == 2:
-                                                        print("too much ошибк")
+                                                        print(hp)
                                             elif cm == "2":
                                                 pas1 = input("Введите пароль:")
                                                 pep83 = inter.Deletion(pas1)
                                                 if pep83 is True:
                                                     Flag = False
                                                 else:
-                                                    print('Неверный пароль.')
+                                                    print('Неверный пароль')
                                                     print('Возврат в меню')
                                             elif cm == "3":
                                                 for i in range(3):
@@ -131,13 +133,13 @@ if __name__ == "__main__":
                                                         ntwork.mrkey = pep84
                                                         break
                                                     else:
-                                                        print("wrong комадна")
+                                                        print(hl)
                                                     if i == 2:
-                                                        print("too much ошибк")
+                                                        print(hp)
                                             elif cm == "4":
                                                 pass
                                             else:
-                                                print("Неправильная команда.")
+                                                print("Неправильная команда")
                                                 print("Возврат в главное меню")
                                         except IndexError:
                                             print("Неправильная команда\n")
