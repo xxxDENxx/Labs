@@ -12,9 +12,14 @@ class Secur:
         self.salt = b"SOMEbodyoncetoldme"
         self.IV456 = b"0123456789101112"
 
-    def GenUSKey(self, key: bytes) -> bytes:
+    def GenUSKey(self, key: bytes, m: str, enk: bytes) -> bytes:
         uskey = hashlib.pbkdf2_hmac("sha256", key, self.salt, 100000)
-        return uskey
+        obj = AES.new(uskey, AES.MODE_CBC, self.IV456)
+        if m == "en":
+            enkey = obj.encrypt(Random.new().read(32))
+        else:
+            enkey = obj.decrypt(enk)
+        return enkey
 
     def Hashing(self, value: bytes) -> bytes:
         hashval = hashlib.sha256(self.salt + value).digest()
@@ -41,6 +46,3 @@ class Secur:
         sizel = int.from_bytes(size, byteorder="big")
         text = text[16:sizel + 16]
         return text
-
-    def GenSKey(self) -> bytes:
-        return Random.new().read(32)

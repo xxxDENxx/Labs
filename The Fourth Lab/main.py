@@ -7,6 +7,8 @@ if __name__ == "__main__":
     if os.name == "nt":
         hl = "Неправильная команда"
         hp = "Слишком много ошибок"
+        hz = "При создании логина можно использовать следующие символы:"
+        hm = "Латинские буквы, цифры, тире, подчеркивания и точки"
         flag = True
         inter = db.Data()
         while flag:
@@ -23,7 +25,7 @@ if __name__ == "__main__":
                         if inter.Enter(log, pas) is True:
                             print("Вы вошли в систему")
                             Flag = True
-                            ntwork = notes.Notes(inter.log)
+                            ntwork = notes.Notes(inter.log, inter.pas)
                             while Flag:
                                 try:
                                     print("->Выберите действие:")
@@ -155,7 +157,18 @@ if __name__ == "__main__":
                             print("Возврат в главное меню")
                         break
                     elif choice == "2":
-                        inter.Creation()
+                        print("Логин должен начинаться с буквы.")
+                        print("Логин должен состоять из 6-20 символов")
+                        print(hz)
+                        print(hm)
+                        log = input("Введите логин: ")
+                        print("\nПароль должен состоять из 8-14 символов")
+                        print("Пароль может состоять из:")
+                        print("Латинских букв, цифр и спецсимволов:")
+                        print("(.,:,;,?,!,*,+,%,-,<,>,@,[,],{,},/,_,$,#, ,)")
+                        pas = input("Введите пароль: ")
+                        paschek = input("Введите пароль ещё раз: ")
+                        inter.Creation(log, pas, paschek)
                         break
                     elif choice == "3":
                         flag = False

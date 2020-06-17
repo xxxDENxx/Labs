@@ -35,101 +35,73 @@ class Data:
                 sd.write(str(dtdict))
         self.nwckey = b""
 
-    def Creation(self) -> None:
-        en = 0
-        for i in range(3):
-            self.er = 0
-            print("Логин должен начинаться с буквы.")
-            print("Логин должен состоять из 6-20 символов")
-            print("При создании логина можно использовать следующие символы:")
-            print("Латинские буквы, цифры, тире, подчеркивания и точки")
-            log = input("Введите логин: ")
-            if log[0] in self.alphl:
+    def Creation(self, log: str, pas: str, paschek: str) -> None:
+        self.er = 0
+        if log[0] in self.alphl:
+            pass
+        else:
+            print("Недопустимое начало логина")
+            self.er = 1
+        for let in log:
+            if let in self.alphf:
                 pass
             else:
-                print("Недопустимое начало логина")
+                print("Недопустимые символы в логине")
                 self.er = 1
-            for let in log:
-                if let in self.alphf:
+                break
+        if len(log) >= 6 and len(log) <= 20:
+            pass
+        else:
+            print("Недопустимая длина логина")
+            self.er = 1
+        if log in self.lap["Logins and Passwords"].keys():
+            print("Данный логин уже существует")
+        else:
+            for let in pas:
+                if let in self.alphp:
                     pass
                 else:
-                    print("Недопустимые символы")
+                    print("Недопустимые символы в пароле")
                     self.er = 1
                     break
-            if len(log) >= 6 and len(log) <= 20:
+            if len(pas) >= 8 and len(pas) <= 14:
                 pass
             else:
-                print("Недопустимая длина логина")
+                print("Недопустимая длина пароля")
                 self.er = 1
             if self.er == 0:
-                if log in self.lap["Logins and Passwords"].keys():
-                    print("Данный логин уже существует")
+                if paschek == pas:
+                    tpas = pas.encode(encoding="UTF-8")
+                    pasw = self.sec.Hashing(tpas)
+                    ciphkey = self.sec.GenUSKey(tpas, "en", b"")
+                    fil = "servdata.encode"
+                    with open(fil, "w", encoding="UTF-8") as sd:
+                        logdata = self.lap["Logins and Passwords"]
+                        logdata.update({log: [pasw, ciphkey]})
+                        sd.write(str(self.lap))
+                    os.mkdir(log)
+                    print("Вы успешно создали аккаунт")
                 else:
-                    print("\nПароль должен состоять из 8-14 символов")
-                    print("Пароль может состоять из:")
-                    print("Латинских букв, цифр и спецсимволов:")
-                    print("(.,:,;,?,!,*,+,%,-,<,>,@,[,],{,},/,_,$,#, ,)")
-                    for j in range(3):
-                        self.er = 0
-                        pas = input("Введите пароль: ")
-                        for let in pas:
-                            if let in self.alphp:
-                                pass
-                            else:
-                                print("Недопустимые символы")
-                                self.er = 1
-                                break
-                        if len(pas) >= 8 and len(pas) <= 14:
-                            pass
-                        else:
-                            print("Недопустимая длина пароля")
-                            self.er = 1
-                        if self.er == 0:
-                            paschek = input("Введите пароль ещё раз: ")
-                            if paschek == pas:
-                                tpas = pas.encode(encoding="UTF-8")
-                                pasw = self.sec.Hashing(tpas)
-                                ciphkey = self.sec.GenUSKey(self.sec.GenSKey())
-                                fil = "servdata.encode"
-                                with open(fil, "w", encoding="UTF-8") as sd:
-                                    logdata = self.lap["Logins and Passwords"]
-                                    logdata.update({log: [pasw, ciphkey]})
-                                    sd.write(str(self.lap))
-                                os.mkdir(log)
-                                print("Вы успешно создали аккаунт")
-                                en = 1
-                                break
-                            else:
-                                print("Пароли не совпадают")
-                        else:
-                            pass
-                        if j == 2:
-                            print("Слишком много ошибок")
-                            print("Возврат в главное меню")
-                            en = 1
-                    if en == 1:
-                        break
+                    print("Пароли не совпадают")
             else:
                 pass
-            if i == 2:
-                print("Слишком много ошибок. Возврат в главное меню")
 
     def Enter(self, log: str, pas: str) -> bool:
         self.log = log
         tpas = pas.encode(encoding="UTF-8")
-        self.pas = self.sec.Hashing(tpas)
+        self.pas = tpas
+        pasw = self.sec.Hashing(tpas)
         with open("servdata.encode", "r", encoding="UTF-8") as sd:
             lap = dict(ast.literal_eval(sd.read()))
         spis = lap["Logins and Passwords"]
-        if self.log in spis.keys() and self.pas in spis[self.log]:
+        if self.log in spis.keys() and pasw in spis[self.log]:
             return True
         else:
             return False
 
     def Deletion(self, pas: str) -> bool:
         tpas = pas.encode(encoding="UTF-8")
-        delpas = self.sec.Hashing(tpas)
-        if delpas == self.pas:
+        if self.sec.Hashing(tpas) == self.sec.Hashing(self.pas):
             with open("servdata.encode", "w", encoding="UTF-8") as sd:
                 logdata = self.lap["Logins and Passwords"]
                 logdata.pop(self.log)
@@ -147,7 +119,8 @@ class Data:
         er = 0
         with open("servdata.encode", "r", encoding="UTF-8") as sd:
             servd = dict(ast.literal_eval(sd.read()))
-        self.nwckey = self.sec.GenUSKey(self.sec.GenSKey())
+        ky = self.sec.GenUSKey(self.pas, "en", b"")
+        self.nwckey = self.sec.GenUSKey(self.pas, "", ky)
         os.chdir(self.log)
         for fl in os.listdir(os.getcwd()):
             try:
@@ -163,7 +136,8 @@ class Data:
                 with open(fl, "w", encoding="UTF-8") as nt:
                     a = tx["Ciphertext"]
                     b = servd["Logins and Passwords"][self.log][1]
-                    dtext = self.sec.Decrypt(a, b)
+                    bk = self.sec.GenUSKey(self.pas, "", b)
+                    dtext = self.sec.Decrypt(a, bk)
                     d = self.sec.Encrypt(dtext, self.nwckey)
                     tx.update({"Ciphertext": d})
                     nt.write(str(tx))
@@ -172,5 +146,5 @@ class Data:
         os.chdir("..")
         with open("servdata.encode", "w", encoding="UTF-8") as sd:
             logdata = self.lap["Logins and Passwords"]
-            logdata[self.log][1] = self.nwckey
+            logdata[self.log][1] = ky
             sd.write(str(self.lap))

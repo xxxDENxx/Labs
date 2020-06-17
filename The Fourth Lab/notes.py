@@ -7,12 +7,14 @@ import security
 
 class Notes:
 
-    def __init__(self, log: str) -> None:
+    def __init__(self, log: str, pas: bytes) -> None:
         self.log = log
+        self.pas = pas
         self.sec = security.Secur()
         with open("servdata.encode", "r", encoding="UTF-8") as sd:
             servd = dict(ast.literal_eval(sd.read()))
-        self.mrkey = servd["Logins and Passwords"][self.log][1]
+        enkey = servd["Logins and Passwords"][self.log][1]
+        self.mrkey = self.sec.GenUSKey(self.pas, "", enkey)
 
     def Creation(self, ntname: str) -> bool:
         os.chdir(self.log)
