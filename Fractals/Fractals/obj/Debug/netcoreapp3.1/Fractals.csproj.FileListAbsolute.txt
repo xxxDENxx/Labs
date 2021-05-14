@@ -1,0 +1,15 @@
+C:\Users\Denis\source\repos\Fractals\Fractals\obj\Debug\netcoreapp3.1\Fractals.csprojAssemblyReference.cache
+C:\Users\Denis\source\repos\Fractals\Fractals\obj\Debug\netcoreapp3.1\Fractals.Form1.resources
+C:\Users\Denis\source\repos\Fractals\Fractals\obj\Debug\netcoreapp3.1\Fractals.csproj.GenerateResource.cache
+C:\Users\Denis\source\repos\Fractals\Fractals\obj\Debug\netcoreapp3.1\Fractals.AssemblyInfoInputs.cache
+C:\Users\Denis\source\repos\Fractals\Fractals\obj\Debug\netcoreapp3.1\Fractals.AssemblyInfo.cs
+C:\Users\Denis\source\repos\Fractals\Fractals\obj\Debug\netcoreapp3.1\Fractals.csproj.CoreCompileInputs.cache
+C:\Users\Denis\source\repos\Fractals\Fractals\bin\Debug\netcoreapp3.1\Fractals.exe
+C:\Users\Denis\source\repos\Fractals\Fractals\bin\Debug\netcoreapp3.1\Fractals.deps.json
+C:\Users\Denis\source\repos\Fractals\Fractals\bin\Debug\netcoreapp3.1\Fractals.runtimeconfig.json
+C:\Users\Denis\source\repos\Fractals\Fractals\bin\Debug\netcoreapp3.1\Fractals.runtimeconfig.dev.json
+C:\Users\Denis\source\repos\Fractals\Fractals\bin\Debug\netcoreapp3.1\Fractals.dll
+C:\Users\Denis\source\repos\Fractals\Fractals\bin\Debug\netcoreapp3.1\Fractals.pdb
+C:\Users\Denis\source\repos\Fractals\Fractals\obj\Debug\netcoreapp3.1\Fractals.dll
+C:\Users\Denis\source\repos\Fractals\Fractals\obj\Debug\netcoreapp3.1\Fractals.pdb
+C:\Users\Denis\source\repos\Fractals\Fractals\obj\Debug\netcoreapp3.1\Fractals.genruntimeconfig.cache
